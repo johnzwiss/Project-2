@@ -1,0 +1,19 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+<div class="container-sm">
+    <form action="/books" method="POST">
+        <fieldset>
+            <legend>Add New Book</legend>
+            <label class = "form-label"> Search: </label>
+             <input type="text" placeholder="Search.." name="search" class="form-control">
+        </fieldset>
+        <!-- <input type="submit" value="Create New book" class="btn btn-success"> -->
+    </form>
+    {% for item in data %}
+    
+   <p><img src = "{{data.items.volumeInfo.imageLinks.thumbnail}}"></p> 
+  
+    {% endfor %}
+
+</div>
+{% endblock %}

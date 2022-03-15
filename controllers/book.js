@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const Book = require('../models/book')
+const fetch = require('node-fetch')
 
 
 // Create router
@@ -72,6 +73,21 @@ router.post('/', (req, res) => {
 			res.redirect(`/error?error=${error}`)
 		})
 })
+
+//search route
+
+router.get('/search', (req, res) => {
+	const { username, userId, loggedIn } = req.session
+	// res.render("books/search")
+	fetch(`https://www.googleapis.com/books/v1/volumes?q=harrypotter&key=AIzaSyCzyk1o5c1QVMxnP3wo6orNwhsm_ukmY1o`)
+	.then(response => response.json())
+	.then(data => {res.render('books/search', {data})
+	console.log(data)
+	});
+	  })
+ 
+  
+
 
 // // edit route -> GET that takes us to the edit form view
 // router.get('/:id/edit', (req, res) => {

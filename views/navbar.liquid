@@ -1,7 +1,7 @@
 {% block content %}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <a href="/" class="navbar-brand">Examplr</a>
+        <a href="/" class="navbar-brand">Mt. Pleasant Little Library</a>
         {% if loggedIn %}
         <a href="/books/mine" class="nav-link text-light">Hello {{ username }} </a>
         {% endif %}
@@ -12,7 +12,7 @@
             {% if loggedIn %}
                 <a href="/books" class="nav-link text-light">View All</a>
                 <a href="/books/new" class="nav-link text-light">New</a>
-                <a href="/books/mine" class="nav-link text-light">My Examples</a>
+                <a href="/books/mine" class="nav-link text-light">My Books</a>
                 <a href="/auth/logout" class="nav-link text-light">Log Out</a>
             {% else %}
                 <a href="/auth/signup" class="nav-link text-light">Sign Up</a>
