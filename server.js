@@ -27,6 +27,7 @@ app.use('/books', BookRouter)
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session
 	res.render('index.liquid', { loggedIn, username, userId })
+	
 })
 
 app.get('/error', (req, res) => {

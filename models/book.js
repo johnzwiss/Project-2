@@ -11,16 +11,18 @@ const BookSchema = new Schema(
 	{
 		title: { type: String, required: true },
 		author: { type: String, required: true },
-        isbn: { type: Number, required: true },
+        isbn: { type: Number },
 		available: { type: Boolean, required: true },
 		description:{ type: String},
+		img: { type: String},
 		owner: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
-		},
+		}
 	},
 	{ timestamps: true }
 )
+
 
 const Book = model('Book', BookSchema)
 

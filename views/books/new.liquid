@@ -1,37 +1,39 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 <div class="container-sm">
-    <form action="/examples" method="POST">
+    <form action="/books" method="POST">
         <fieldset>
-            <legend>Create New Example</legend>
-            <label class="form-label">Title: </label>
+            <legend>Add New Book</legend>
+            <!-- <label class = "form-label"> Search: </label>
+             <input type="text" placeholder="Search.." name="search" class="form-control">
+            <label class="form-label">Title: </label> -->
             <input 
                 type="text" 
                 name="title" 
-                placeholder="enter example title"
+                placeholder="enter book title"
                 class="form-control"
             >
-            <label class="form-label">Body:</label>
+            <label class="form-label">Author:</label>
             <input 
                 type="text" 
-                name="body" 
-                placeholder="enter example body" 
+                name="author" 
+                placeholder="enter author" 
                 class="form-control"
             >
-            <label class="form-label">Amount:</label>
+            <label class="form-label">Description:</label>
             <input 
-                type="number" 
-                name="amount" 
+                type="text" 
+                name="description" 
                 class="form-control"
             >
-            <label class="form-label">Ready:</label>
+            <label class="form-label">Available:</label>
             <input 
                 type="checkbox" 
-                name="ready" 
+                name="available" 
                 class="form-check-input"
             >
         </fieldset>
-        <input type="submit" value="Create New Example" class="btn btn-success">
+        <input type="submit" value="Create New book" class="btn btn-success">
     </form>
 </div>
 {% endblock %}

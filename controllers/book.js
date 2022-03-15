@@ -29,7 +29,8 @@ router.get('/', (req, res) => {
 		.then(books => {
 			const username = req.session.username
 			const loggedIn = req.session.loggedIn
-			
+			console.log(req.session.username)
+			console.log(books)
 			res.render('books/index', { books, username, loggedIn })
 		})
 		.catch(error => {
@@ -58,12 +59,13 @@ router.get('/new', (req, res) => {
 
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
-	req.body.ready = req.body.ready === 'on' ? true : false
+	req.body.available = req.body.available === 'on' ? true : false
+	console.log(req.body)
 
 	req.body.owner = req.session.userId
 	Book.create(req.body)
 		.then(book => {
-			console.log('this was returned from create', book)
+			console.log('this was returned from create', book.title)
 			res.redirect('/books')
 		})
 		.catch(error => {

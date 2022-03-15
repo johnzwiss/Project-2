@@ -1,24 +1,26 @@
 {% layout 'layout.liquid'%}
 {% block content %}
 <div>
-    <h2 class="display-6">All Examples</h2>
+    <h2 class="display-6">All Books</h2>
     <div class="row">
-        {% for example in examples %}
+        {% for book in books %}
+        <!-- {% if book.available %} -->
         <div class="card" style="width: 18rem;">
-            <h5 class="card-header">{{ example.title }}</h5>
+            <h5 class="card-header">{{ book.title }}</h5>
             <div class="card-body">
                 <h5 class="card-title">
-                    Ready?: {{ example.ready }}
+                        Available
                 </h5>
                 <p class="card-text">
-                    Body: {{ example.body }}
+                    Body: {{ book.description }}
                 </p>
                 <p class="card-text">
-                    Amount: {{ example.amount }}
+                    Amount: {{ book.author }}
                 </p>
-                <a href="/examples/{{ example.id }}" class="btn btn-info">
-                    View {{ example.title }}
+                <a href="/books/{{ book.id }}" class="btn btn-info">
+                    View {{ book.title }}
                 </a>
+                <!-- {% endif %} -->
             </div>
         </div>
         {% endfor %}
