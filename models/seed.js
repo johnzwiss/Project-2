@@ -3,6 +3,8 @@
 ///////////////////////////////////////
 const mongoose = require("./connection");
 const User = require('../models/user')
+require('dotenv').config()
+
 
 ///////////////////////////////////////////
 // Seed Code
@@ -19,7 +21,7 @@ db.on("open", () => {
   
     // Run any database queries in this function
     const admin = [
-        { username: "johnzwiss", password: "z", role: "admin"}
+        { username: "admin1", password: process.env.ADMINPASS, role: "admin"}
     ]
   
     // Delete all fruits

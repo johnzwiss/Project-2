@@ -4,6 +4,7 @@
 const express = require('express')
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+require('dotenv').config()
 
 ////////////////////////////////////////////
 // Create router
@@ -25,8 +26,11 @@ router.post('/signup', async (req, res) => {
 		req.body.password,
 		await bcrypt.genSalt(10)
 	)
-	// create a new user
+	console.log(req.body)
+	
+	//create a new user
 	User.create(req.body)
+	
 		// if created successfully redirect to login
 		.then((user) => {
 			res.redirect('/auth/login')
@@ -53,14 +57,14 @@ router.post('/login', async (req, res) => {
 	User.findOne({ username: username })
 		.then(async (user) => {
 			// check if the user exists
-			if (user) {
+			if (user && (!user.username === "admin1")) {
+				
 				// compare the password
 				// bcrypt.compare evaluates to a truthy or a falsy value
 				const result = await bcrypt.compare(password, user.password)
 
 				if (result) {
 					console.log('the user', user);
-					
 					// then we'll need to use the session object
 					// store some properties in the session
 					req.session.username = user.username
@@ -76,7 +80,26 @@ router.post('/login', async (req, res) => {
 					// send an error if the password doesnt match
 					res.redirect('/error?error=username%20or%20password%20incorrect')
 				}
-			} else {
+			} 
+			else if(user.username === "admin1" && user.password === process.env.ADMINPASS) {
+				console.log('the user', user);
+				// then we'll need to use the session object
+				// store some properties in the session
+				req.session.username = user.username
+				req.session.loggedIn = true
+				req.session.userId = user.id
+
+				  const { username, loggedIn, userId } = req.session
+
+				console.log('session user id', req.session.userId)
+				// redirect to /examples if login is successful
+				res.redirect('/') }
+			//  else {
+			// 	// send an error if the password doesnt match
+			// 	res.redirect('/error?error=username%20or%20password%20incorrect')
+			// }
+			
+			else {
 				// send an error if the user doesnt exist
 				res.redirect('/error?error=That%20user%20does%20not%20exist')
 			}
