@@ -122,7 +122,8 @@ router.get('/:id', (req, res) => {
 	Book.findById(bookId)
 		.then(book => {
             const {username, loggedIn, userId} = req.session
-			res.render('books/show', { book, username, loggedIn, userId })
+			const adminName = process.env.ADMINNAME
+			res.render('books/show', { book, username, loggedIn, userId, adminName })
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)

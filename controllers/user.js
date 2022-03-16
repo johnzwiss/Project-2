@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
 					res.redirect('/error?error=username%20or%20password%20incorrect')
 				}
 			} 
-			else if(user.username === "admin1" && user.password === process.env.ADMINPASS) {
+			else if(user.username === process.env.ADMINNAME && user.password === process.env.ADMINPASS) {
 				console.log('the user', user);
 				// then we'll need to use the session object
 				// store some properties in the session

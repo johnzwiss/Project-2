@@ -21,7 +21,7 @@ db.on("open", () => {
   
     // Run any database queries in this function
     const admin = [
-        { username: "admin1", password: process.env.ADMINPASS, role: "admin"}
+        { username: process.env.ADMINNAME, password: process.env.ADMINPASS, role: "admin"}
     ]
   
     // Delete all fruits

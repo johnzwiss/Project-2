@@ -12,7 +12,7 @@
         </h2>
         <h3>Amount: {{ book.author }}</h3>
         <h6>Body: {{ book.description }}</h6>
-        {% if book.owner == userId %}
+        {% if book.owner == userId or username == adminName %}
         <div class="btn-group">
 
             <a href="/books/{{ book.id }}/edit" class="btn btn-primary">Edit</a>
