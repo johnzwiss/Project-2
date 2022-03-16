@@ -78,13 +78,22 @@ router.post('/', (req, res) => {
 
 router.get('/search', (req, res) => {
 	const { username, userId, loggedIn } = req.session
-	// res.render("books/search")
-	fetch(`https://www.googleapis.com/books/v1/volumes?q=harrypotter&key=${process.env.APIKEY}`)
+	res.render("books/search")})
+	
+	router.post('/search', (req, res) => {
+		// set the password to hashed password
+	 
+		console.log(req.body)
+		fetch(`https://www.googleapis.com/books/v1/volumes?q=${req.body.search}&key=${process.env.APIKEY}`)
 	.then(response => response.json())
 	.then(data => {res.render('books/search', {data})
-	console.log(data)
+	console.log(data.items)
 	});
-	  })
+		
+	})
+	
+	
+	  
  
   
 

@@ -1,9 +1,9 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 <div class="container-sm">
-    <form action="/books" method="POST">
+    <form action="/books/search" method="POST">
         <fieldset>
-            <legend>Add New Book</legend>
+            <legend>Find New Book</legend>
             <label class = "form-label"> Search: </label>
              <input type="text" placeholder="Search.." name="search" class="form-control">
         </fieldset>
@@ -11,7 +11,7 @@
     </form>
     {% for item in data %}
     
-   <p><img src = "{{data.items.volumeInfo.imageLinks.thumbnail}}"></p> 
+   <p><img src = "{{data.items[0].volumeInfo.imageLinks.thumbnail}}"></p> 
   
     {% endfor %}
 

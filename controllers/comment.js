@@ -26,6 +26,7 @@ router.post('/:bookId', (req, res) => {
     console.log('first comment body', req.body)
     console.log("the session is", req.session.username)
     
+    
     // we'll adjust req.body to include an author
     // the author's id will be the logged in user's id
     req.body.author = req.session.userId
@@ -35,6 +36,7 @@ router.post('/:bookId', (req, res) => {
         .then(book => {
             // then we'll send req.body to the comments array
             book.comments.push(req.body)
+            console.log("the author is",  book.comments.note)
             // save the fruit
             return book.save()
         })
