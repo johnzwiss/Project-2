@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
 	User.findOne({ username: username })
 		.then(async (user) => {
 			// check if the user exists
-			if (user && (!user.username === "admin1")) {
+			if (user && (user.username !== process.env.ADMINNAME)) {
 				
 				// compare the password
 				// bcrypt.compare evaluates to a truthy or a falsy value

@@ -79,7 +79,7 @@ router.post('/', (req, res) => {
 router.get('/search', (req, res) => {
 	const { username, userId, loggedIn } = req.session
 	// res.render("books/search")
-	fetch(`https://www.googleapis.com/books/v1/volumes?q=harrypotter&key=AIzaSyCzyk1o5c1QVMxnP3wo6orNwhsm_ukmY1o`)
+	fetch(`https://www.googleapis.com/books/v1/volumes?q=harrypotter&key=${process.env.APIKEY}`)
 	.then(response => response.json())
 	.then(data => {res.render('books/search', {data})
 	console.log(data)

@@ -6,6 +6,7 @@ const express = require("express")
 const middleware = require('./utils/middleware')
 const BookRouter = require('./controllers/book')
 const UserRouter = require('./controllers/user')
+const CommentRouter = require('./controllers/comment')
 const User = require("./models/user")
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
 // user and resource routes linked in ./utils/middleware.js
@@ -23,6 +24,7 @@ middleware(app)
 
 app.use('/auth', UserRouter)
 app.use('/books', BookRouter)
+app.use('/comments', CommentRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session
