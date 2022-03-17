@@ -78,16 +78,22 @@ router.post('/', (req, res) => {
 
 router.get('/search', (req, res) => {
 	const { username, userId, loggedIn } = req.session
+	
 	res.render("books/search")})
 	
 	router.post('/search', (req, res) => {
 		// set the password to hashed password
+		
 	 
 		console.log(req.body)
 		fetch(`https://www.googleapis.com/books/v1/volumes?q=${req.body.search}&key=${process.env.APIKEY}`)
+		
 	.then(response => response.json())
-	.then(data => {res.render('books/search', {data})
-	console.log(data.items)
+	.then(data => {
+		const books = data.items
+		res.render('books/search', {data: data, books: books})
+	
+	
 	});
 		
 	})
@@ -98,32 +104,32 @@ router.get('/search', (req, res) => {
   
 
 
-// // edit route -> GET that takes us to the edit form view
-// router.get('/:id/edit', (req, res) => {
-// 	// we need to get the id
-// 	const exampleId = req.params.id
-// 	Example.findById(exampleId)
-// 		.then(example => {
-// 			res.render('examples/edit', { example })
-// 		})
-// 		.catch((error) => {
-// 			res.redirect(`/error?error=${error}`)
-// 		})
-// })
+// edit route -> GET that takes us to the edit form view
+router.get('/:id/edit', (req, res) => {
+	// we need to get the id
+	const bookId = req.params.id
+	Book.findById(bookId)
+		.then(book => {
+			res.render('books/edit', { book })
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
 
-// // update route
-// router.put('/:id', (req, res) => {
-// 	const exampleId = req.params.id
-// 	req.body.ready = req.body.ready === 'on' ? true : false
+// update route
+router.put('/:id', (req, res) => {
+	const bookId = req.params.id
+	req.body.ready = req.body.ready === 'on' ? true : false
 
-// 	Example.findByIdAndUpdate(exampleId, req.body, { new: true })
-// 		.then(example => {
-// 			res.redirect(`/examples/${example.id}`)
-// 		})
-// 		.catch((error) => {
-// 			res.redirect(`/error?error=${error}`)
-// 		})
-// })
+	Book.findByIdAndUpdate(bookId, req.body, { new: true })
+		.then(book => {
+			res.redirect(`/books/${book.id}`)
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
 
 // show route
 router.get('/:id', (req, res) => {
