@@ -6,16 +6,17 @@
         {% for book in books %}
         <!-- {% if book.available %} -->
         <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{book.img }}}" alt="Card image cap">
             <h5 class="card-header">{{ book.title }}</h5>
             <div class="card-body">
                 <h5 class="card-title">
                         Available
                 </h5>
                 <p class="card-text">
-                    Body: {{ book.description }}
+                    Description: {{ book.description }}
                 </p>
                 <p class="card-text">
-                    Amount: {{ book.author }}
+                    Author: {{ book.author }}
                 </p>
                 <a href="/books/{{ book.id }}" class="btn btn-info">
                     View {{ book.title }}

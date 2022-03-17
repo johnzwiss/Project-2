@@ -16,7 +16,7 @@
    <p>Title: {{book.volumeInfo.title}}</p> 
    <p>Author: {{book.volumeInfo.authors}}</p> 
    <p>Description: {{book.volumeInfo.description}}</p> 
-   <p>ID:   <a href="/books/new/{{ book.id }} " class="btn btn-info">
+   <p>ISBN: {{ book.volumeInfo.industryIdentifiers[0].identifier }}  <a href="/books/new/{{ book.volumeInfo.industryIdentifiers[0].identifier }} " class="btn btn-info">
     View {{ book.volume.title }}
 </a> </p>
 

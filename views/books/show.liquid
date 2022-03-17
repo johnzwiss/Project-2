@@ -5,18 +5,21 @@
         <h2>
             {{ book.title }} -
             {% if book.available %}
-            Ready
+            Available
             {% else %}
             Not Ready
             {%endif%}
         </h2>
-        <p><img src = "{{books.volumeInfo.imageLinks.thumbnail}}"></p> 
-        <h3>Amount: {{ books.volumeInfo.authors }}</h3>
-        <h6>Body: {{ books.volumeInfo.description }}</h6>
+        <p><img src = "{{book.img}}"></p> 
+        <h3>Author: {{ book.author }}</h3>
+        <h6>Description: {{ book.description }}</h6>
+
         {% if book.owner == userId or username == adminName %}
         <div class="btn-group">
-
+        
             <a href="/books/{{ book.id }}/edit" class="btn btn-primary">Edit</a>
+            <a href="/books/preview/{{ book.id }}" class="btn btn-primary">Preview</a>
+           
             <form action="/books/{{ book.id }}?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" class="btn btn-danger">
             </form>

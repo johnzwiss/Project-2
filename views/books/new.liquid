@@ -7,13 +7,22 @@
             <!-- <label class = "form-label"> Search: </label>
              <input type="text" placeholder="Search.." name="search" class="form-control">-->
             <label class="form-label">Title: </label> 
-            <!-- <input 
+            <input 
+                style = "display: none;"
                 type="text" 
                 name="img" 
                 placeholder="enter book title"
                 class="form-control"
-                value="{{books.volumeInfo.imageLinks.thumbnail}}"
-            > -->
+                value= "{{books.volumeInfo.imageLinks.thumbnail}}"
+            >
+            <input 
+            style = "display: none;"
+            type="text" 
+            name="isbn" 
+            placeholder="enter book title"
+            class="form-control"
+            value= "{{books.volumeInfo.industryIdentifiers[0].identifier}}"
+        >
             <input 
                 type="text" 
                 name="title" 

@@ -56,11 +56,11 @@ router.get('/mine', (req, res) => {
 router.get('/new/:id', (req, res) => {
 	const { username, userId, loggedIn } = req.session
 	const bookId = req.params.id
-	fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookId}&key=${process.env.APIKEY}`)
+	fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${bookId}&key=${process.env.APIKEY}`)
 		
 	.then(response => response.json())
 	.then(data => {
-		console.log("this is the data", data.items[0])
+		console.log("this is the data", data.items)
 		const books = data.items[0]
 		res.render('books/new', {data: data, books: books, username, loggedIn})
 	
@@ -103,6 +103,7 @@ router.get('/search', (req, res) => {
 	.then(data => {
 		const books = data.items
 		res.render('books/search', {data: data, books: books})
+		console.log(data.items[0].volumeInfo.industryIdentifiers[0].identifier)
 	
 	
 	});
@@ -157,6 +158,7 @@ router.get('/:id', (req, res) => {
 	// });
 	Book.findById(bookId)
 		.then(book => {
+			console.log(book)
             const {username, loggedIn, userId} = req.session
 			const adminName = process.env.ADMINNAME
 			res.render('books/show', { book, username, loggedIn, userId, adminName })
@@ -177,6 +179,20 @@ router.delete('/:id', (req, res) => {
 			res.redirect(`/error?error=${error}`)
 		})
 })
+
+//preview route
+
+router.get('/preview/:id', (req, res)=>{
+	const bookId = req.params.id
+	Book.findById(bookId)
+		.then(book => {
+			console.log(book.isbn)
+            const {username, loggedIn, userId} = req.session
+			const adminName = process.env.ADMINNAME
+			res.render('preview', { book, username, loggedIn, userId, adminName })
+		})
+}
+)
 
 // Export the Router
 module.exports = router
