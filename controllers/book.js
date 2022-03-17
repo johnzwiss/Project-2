@@ -53,9 +53,20 @@ router.get('/mine', (req, res) => {
 })
 
 // new route -> GET route that renders our page with the form
-router.get('/new', (req, res) => {
+router.get('/new/:id', (req, res) => {
 	const { username, userId, loggedIn } = req.session
-	res.render('books/new', { username, loggedIn })
+	const bookId = req.params.id
+	fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookId}&key=${process.env.APIKEY}`)
+		
+	.then(response => response.json())
+	.then(data => {
+		console.log("this is the data", data.items[0])
+		const books = data.items[0]
+		res.render('books/new', {data: data, books: books, username, loggedIn})
+	
+	
+	});
+	// res.render('books/new', { username, loggedIn })
 })
 
 // create -> POST route that actually calls the db and makes a new document
@@ -134,6 +145,16 @@ router.put('/:id', (req, res) => {
 // show route
 router.get('/:id', (req, res) => {
 	const bookId = req.params.id
+	// fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookId}&key=${process.env.APIKEY}`)
+		
+	// .then(response => response.json())
+	// .then(data => {
+	// 	console.log("this is the data", data.items[0])
+	// 	const books = data.items[0]
+	// 	res.render('books/show', {data: data, books: books})
+	
+	
+	// });
 	Book.findById(bookId)
 		.then(book => {
             const {username, loggedIn, userId} = req.session

@@ -5,13 +5,21 @@
         <fieldset>
             <legend>Add New Book</legend>
             <!-- <label class = "form-label"> Search: </label>
-             <input type="text" placeholder="Search.." name="search" class="form-control">
-            <label class="form-label">Title: </label> -->
+             <input type="text" placeholder="Search.." name="search" class="form-control">-->
+            <label class="form-label">Title: </label> 
+            <!-- <input 
+                type="text" 
+                name="img" 
+                placeholder="enter book title"
+                class="form-control"
+                value="{{books.volumeInfo.imageLinks.thumbnail}}"
+            > -->
             <input 
                 type="text" 
                 name="title" 
                 placeholder="enter book title"
                 class="form-control"
+                value="{{books.volumeInfo.title}}"
             >
             <label class="form-label">Author:</label>
             <input 
@@ -19,12 +27,15 @@
                 name="author" 
                 placeholder="enter author" 
                 class="form-control"
+                value="{{books.volumeInfo.authors}}"
+                
             >
             <label class="form-label">Description:</label>
             <input 
                 type="text" 
                 name="description" 
                 class="form-control"
+                value="{{books.volumeInfo.description}}"
             >
             <label class="form-label">Available:</label>
             <input 

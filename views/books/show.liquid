@@ -10,8 +10,9 @@
             Not Ready
             {%endif%}
         </h2>
-        <h3>Amount: {{ book.volume.author }}</h3>
-        <h6>Body: {{ book.description }}</h6>
+        <p><img src = "{{books.volumeInfo.imageLinks.thumbnail}}"></p> 
+        <h3>Amount: {{ books.volumeInfo.authors }}</h3>
+        <h6>Body: {{ books.volumeInfo.description }}</h6>
         {% if book.owner == userId or username == adminName %}
         <div class="btn-group">
 
