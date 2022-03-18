@@ -4,7 +4,7 @@
     <h2 class="display-6">My Books Added</h2>
     <div class="row">
         {% for book in books %}
-       
+        {% if book.owner == userId %}
         <div class="card" style="width: 18rem;">
             {% if book.img == "" %}
             <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="Card image cap">
@@ -28,7 +28,42 @@
               
             </div>
         </div>
+        {% endif %}
         {% endfor %}
+        
+    </div>
+</div>
+<div>
+    <h2 class="display-6">My Books Checked Out</h2>
+    <div class="row">
+        {% for book in books %}
+        {% if book.checkedOutBy == userId %}
+        <div class="card" style="width: 18rem;">
+            {% if book.img == "" %}
+            <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="Card image cap">
+           {% else %}
+            <img class="card-img-top" src="{{book.img }}" alt="Card image cap">
+            {% endif %} 
+            <h5 class="card-header">{{ book.title }}</h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                        Available
+                </h5>
+                <p class="card-text">
+                    Description: {{ book.description }}
+                </p>
+                <p class="card-text">
+                    Author: {{ book.author }}
+                </p>
+                <a href="/books/{{ book.id }}" class="btn btn-info">
+                    View {{ book.title }}
+                </a>
+              
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        
     </div>
 </div>
 {% endblock %}

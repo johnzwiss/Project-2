@@ -17,6 +17,7 @@ const BookSchema = new Schema(
 		available: { type: Boolean, required: true },
 		description:{ type: String},
 		img: { type: String},
+		read: {type: Boolean},
 		owner: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',

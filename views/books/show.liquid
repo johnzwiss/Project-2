@@ -18,7 +18,12 @@
         <h3>Author: {{ book.author }}</h3>
         <h6>Description: {{ book.description }}</h6>
 
-        <a href="/books/{{ book.id }}/checkout" class="btn btn-primary">Checkout</a>
+        <!-- <a href="/books/{{ book.id }}/checkout" class="btn btn-primary">Checkout</a> -->
+
+        <form action="/books/{{book.id}}?_method=PUT" method="POST">
+            <input type="submit" value="Checkout Book" class="btn btn-success">
+        </form>
+
 
         {% if book.owner == userId or username == adminName %}
         <div class="btn-group">

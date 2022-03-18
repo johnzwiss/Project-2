@@ -45,8 +45,8 @@ router.get('/mine', (req, res) => {
     const { username, userId, loggedIn } = req.session
 	Book.find({ $or: [{owner: userId}, {checkedOutBy: userId}] })
 		.then(books => {
-			res.render('books/mine', { books, username, loggedIn })
-			console.log(books)
+			res.render('books/mine', { books, username, loggedIn, userId })
+			console.log(books.owner)
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
@@ -114,20 +114,7 @@ router.get('/search', (req, res) => {
 	
 	  
  
-// checkout route 
 
-router.get('/:id/checkout', (req, res) => {
-	// we need to get the id
-	const { username, userId, loggedIn } = req.session
-	const bookId = req.params.id
-	Book.findById(bookId)
-		.then(book => {
-			res.render('books/checkout', { book })
-		})
-		.catch((error) => {
-			res.redirect(`/error?error=${error}`)
-		})
-})
 
 // checkout book
 router.put('/:id', (req, res) => {
@@ -138,12 +125,13 @@ router.put('/:id', (req, res) => {
 	Book.findByIdAndUpdate(bookId, req.body, { new: true })
 		.then(book => {
 			console.log(book)
-			res.redirect(`/books/${book.id}`)
+			res.redirect(`/books/mine`)
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
 		})
 })
+
 
 
 // edit route -> GET that takes us to the edit form view
