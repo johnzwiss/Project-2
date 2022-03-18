@@ -36,13 +36,14 @@ router.post('/:bookId', (req, res) => {
         .then(book => {
             // then we'll send req.body to the comments array
             book.comments.push(req.body)
-            console.log("the author is",  book.comments.note)
+            
             // save the fruit
             return book.save()
         })
         .then(book => {
             // redirect
             res.redirect(`/books/${book.id}`)
+            console.log("the author is",  book.comments.author)
         })
         // or show an error if we have one
         .catch(error => {
