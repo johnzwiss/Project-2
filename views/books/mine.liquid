@@ -2,10 +2,12 @@
 {% block content %}
 <div>
     <h2 class="display-6">My Books Added</h2>
-    <div class="row">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for book in books %}
         {% if book.owner == userId %}
-        <div class="card" style="width: 18rem;">
+        <div class="col">
+            <div class="card" style="width: 18rem; background-color: #FBEEC1; color:#659DBD">
             {% if book.img == "" %}
             <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="Card image cap">
            {% else %}
@@ -16,8 +18,7 @@
                 <h5 class="card-title">
                         Available
                 </h5>
-                <p class="card-text">
-                    Description: {{ book.description }}
+
                 </p>
                 <p class="card-text">
                     Author: {{ book.author }}
@@ -28,17 +29,21 @@
               
             </div>
         </div>
-        {% endif %}
-        {% endfor %}
+       
         
     </div>
+    {% endif %}
+    {% endfor %}
+</div>
 </div>
 <div>
     <h2 class="display-6">My Books Checked Out</h2>
-    <div class="row">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for book in books %}
         {% if book.checkedOutBy == userId %}
-        <div class="card" style="width: 18rem;">
+        <div class="col">
+            <div class="card" style="width: 18rem; background-color: #FBEEC1; color:#659DBD">
             {% if book.img == "" %}
             <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="Card image cap">
            {% else %}
@@ -49,9 +54,7 @@
                 <h5 class="card-title">
                         Available
                 </h5>
-                <p class="card-text">
-                    Description: {{ book.description }}
-                </p>
+        
                 <p class="card-text">
                     Author: {{ book.author }}
                 </p>
@@ -61,9 +64,11 @@
               
             </div>
         </div>
-        {% endif %}
-        {% endfor %}
+       
         
     </div>
+    {% endif %}
+    {% endfor %}
+</div>
 </div>
 {% endblock %}
