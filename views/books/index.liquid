@@ -1,34 +1,39 @@
 {% layout 'layout.liquid'%}
 {% block content %}
-<div>
-    <h2 class="display-6">All Books</h2>
-    <div class="row">
+
+    <h2 class="display-6" style="text-align: center; color: white;">All Books</h2>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for book in books %}
-        <!-- {% if book.available %} -->
-        <div class="card" style="width: 18rem;">
+        {% if book.available %}
+
+         <div class="col">
+            <div class="card" style="width: 18rem; background-color: #FBEEC1; color:#659DBD">
             {% if book.img == "" %}
-            <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="Card image cap">
+            <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" class="img-thumbnail"  alt="Card image cap">
            {% else %}
-            <img class="card-img-top" src="{{book.img }}" alt="Card image cap">
+            <img class="card-img-top" src="{{book.img }}" class="img fluid img-thumbnail" style ="max-height:5%" alt="Card image cap">
             {% endif %} 
             <h5 class="card-header">{{ book.title }}</h5>
             <div class="card-body">
                 <h5 class="card-title">
                         Available
                 </h5>
-                <p class="card-text">
-                    Description: {{ book.description }}
-                </p>
+                <ul class="list-group list-group-flush"></ul>
+                
                 <p class="card-text">
                     Author: {{ book.author }}
                 </p>
                 <a href="/books/{{ book.id }}" class="btn btn-info">
                     View {{ book.title }}
                 </a>
-                <!-- {% endif %} -->
+                
+             </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
+
 {% endblock %}

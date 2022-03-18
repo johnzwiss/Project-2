@@ -1,0 +1,14 @@
+body {
+    background-color: #659DBD;
+    background-image: url('https://i.imgur.com/N0Z7epX.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#welcome {
+    color : white;
+}
+
+#navbar {
+    background-color: #8D8741 ;
+}
