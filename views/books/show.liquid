@@ -10,7 +10,11 @@
             Not Ready
             {%endif%}
         </h2>
+        {% if book.img == "" %} 
+        <p><img src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg"></p> 
+        {%else%} 
         <p><img src = "{{book.img}}"></p> 
+        {%endif%} 
         <h3>Author: {{ book.author }}</h3>
         <h6>Description: {{ book.description }}</h6>
 

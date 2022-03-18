@@ -45,7 +45,7 @@ router.get('/mine', (req, res) => {
     const { username, userId, loggedIn } = req.session
 	Book.find({ owner: userId })
 		.then(books => {
-			res.render('books/index', { books, username, loggedIn })
+			res.render('books/mine', { books, username, loggedIn })
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
@@ -103,7 +103,7 @@ router.get('/search', (req, res) => {
 	.then(data => {
 		const books = data.items
 		res.render('books/search', {data: data, books: books})
-		console.log(data.items[0].volumeInfo.industryIdentifiers[0].identifier)
+		// console.log(data.items[0].volumeInfo.industryIdentifiers[0].identifier)
 	
 	
 	});
@@ -132,7 +132,7 @@ router.get('/:id/edit', (req, res) => {
 // update route
 router.put('/:id', (req, res) => {
 	const bookId = req.params.id
-	req.body.ready = req.body.ready === 'on' ? true : false
+	req.body.available = req.body.available === 'on' ? true : false
 
 	Book.findByIdAndUpdate(bookId, req.body, { new: true })
 		.then(book => {

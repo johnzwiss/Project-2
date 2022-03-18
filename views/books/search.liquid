@@ -5,9 +5,10 @@
         <fieldset>
             <legend>Find New Book</legend>
             <label class = "form-label"> Search: </label>
-             <input type="text" placeholder="Search.." name="search" class="form-control">
+             <input type="text" placeholder="Enter Author, Title, ISBN, etc.." name="search" class="form-control">
         </fieldset>
-        <!-- <input type="submit" value="Create New book" class="btn btn-success"> -->
+        <input type="submit" value="Search" class="btn btn-success">
+      
     </form>
     
     {% for book in books %}
