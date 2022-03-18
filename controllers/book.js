@@ -43,9 +43,10 @@ router.get('/', (req, res) => {
 router.get('/mine', (req, res) => {
     // destructure user info from req.session
     const { username, userId, loggedIn } = req.session
-	Book.find({ owner: userId })
+	Book.find({ $or: [{owner: userId}, {checkedOutBy: userId}] })
 		.then(books => {
 			res.render('books/mine', { books, username, loggedIn })
+			console.log(books)
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
@@ -113,7 +114,36 @@ router.get('/search', (req, res) => {
 	
 	  
  
-  
+// checkout route 
+
+router.get('/:id/checkout', (req, res) => {
+	// we need to get the id
+	const { username, userId, loggedIn } = req.session
+	const bookId = req.params.id
+	Book.findById(bookId)
+		.then(book => {
+			res.render('books/checkout', { book })
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+// checkout book
+router.put('/:id', (req, res) => {
+	const bookId = req.params.id
+	req.body.available = req.body.available === 'on' ? true : false
+	req.body.checkedOutBy = req.session.userId
+
+	Book.findByIdAndUpdate(bookId, req.body, { new: true })
+		.then(book => {
+			console.log(book)
+			res.redirect(`/books/${book.id}`)
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
 
 
 // edit route -> GET that takes us to the edit form view
@@ -146,16 +176,7 @@ router.put('/:id', (req, res) => {
 // show route
 router.get('/:id', (req, res) => {
 	const bookId = req.params.id
-	// fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookId}&key=${process.env.APIKEY}`)
-		
-	// .then(response => response.json())
-	// .then(data => {
-	// 	console.log("this is the data", data.items[0])
-	// 	const books = data.items[0]
-	// 	res.render('books/show', {data: data, books: books})
-	
-	
-	// });
+
 	Book.findById(bookId)
 		.then(book => {
 			console.log(book)

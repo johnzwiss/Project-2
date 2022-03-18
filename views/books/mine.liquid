@@ -4,7 +4,7 @@
     <h2 class="display-6">My Books Added</h2>
     <div class="row">
         {% for book in books %}
-        <!-- {% if book.available %} -->
+       
         <div class="card" style="width: 18rem;">
             {% if book.img == "" %}
             <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="Card image cap">
@@ -25,7 +25,7 @@
                 <a href="/books/{{ book.id }}" class="btn btn-info">
                     View {{ book.title }}
                 </a>
-                <!-- {% endif %} -->
+              
             </div>
         </div>
         {% endfor %}

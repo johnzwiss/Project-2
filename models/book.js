@@ -21,6 +21,10 @@ const BookSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: 'User',
 		},
+		checkedOutBy: {
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		},
 		comments: [commentSchema]
 	},
 	
