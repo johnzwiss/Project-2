@@ -10,8 +10,41 @@
         <input type="submit" value="Search" class="btn btn-success">
       
     </form>
-    
-    {% for book in books %}
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for book in books %}
+        {% if book.available %}
+
+         <div class="col">
+            <div class="card" style="width: 18rem; background-color: #FBEEC1; color:#659DBD">
+            {% if book.volumeInfo.imageLinks.thumbnail == "" %}
+            <img class="card-img-top" src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" class="img-thumbnail"  alt="Card image cap">
+           {% else %}
+            <img class="card-img-top" src="{{book.volumeInfo.imageLinks.thumbnail}}" class="img fluid img-thumbnail" style ="max-height:5%" alt="Card image cap">
+            {% endif %} 
+            <h5 class="card-header">{{ book.volumeInfo.title }}</h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                        Available
+                </h5>
+                <ul class="list-group list-group-flush"></ul>
+                
+                <p class="card-text">
+                    Author: {{ book.volumeInfo.authors }}
+                </p>
+                <a href="/books/new/{{ book.volumeInfo.industryIdentifiers[0].identifier }} " class="btn btn-info">
+                    View {{  book.volume.title }}
+                </a>
+                
+             </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+   
+ <!-- {% for book in books %}
     
    <p><img src = "{{book.volumeInfo.imageLinks.thumbnail}}"></p> 
    <p>Title: {{book.volumeInfo.title}}</p> 
@@ -19,9 +52,8 @@
    <p>Description: {{book.volumeInfo.description}}</p> 
    <p>ISBN: {{ book.volumeInfo.industryIdentifiers[0].identifier }}  <a href="/books/new/{{ book.volumeInfo.industryIdentifiers[0].identifier }} " class="btn btn-info">
     View {{ book.volume.title }}
-</a> </p>
-
-   {% endfor %}
+</a> </p> -->
+{% endfor %}
   
   
 

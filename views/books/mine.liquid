@@ -1,9 +1,9 @@
 {% layout 'layout.liquid'%}
 {% block content %}
 <div>
-    <h2 class="display-6">My Books Added</h2>
+    <h2 class="display-6" style="text-align: center; color: white;">My Books Added</h2>
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for book in books %}
         {% if book.owner == userId %}
         <div class="col">
@@ -37,9 +37,9 @@
 </div>
 </div>
 <div>
-    <h2 class="display-6">My Books Checked Out</h2>
+    <h2 class="display-6" style="text-align: center; color: white;">My Books Checked Out</h2>
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
         {% for book in books %}
         {% if book.checkedOutBy == userId %}
         <div class="col">
