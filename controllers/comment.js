@@ -16,10 +16,8 @@ const Book = require('../models/book')
 ////////////////////////////////////////////
 const router = express.Router()
 
-////////////////////////////////////////////
 // Routes
-////////////////////////////////////////////
-// only need two routes for comments right now
+
 // POST -> to create a comment
 router.post('/:bookId', (req, res) => {
     const bookId = req.params.bookId
@@ -27,17 +25,13 @@ router.post('/:bookId', (req, res) => {
     console.log("the session is", req.session.username)
     
     
-    // we'll adjust req.body to include an author
     // the author's id will be the logged in user's id
     req.body.author = req.session.userId
     console.log('updated comment body', req.body)
-    // we'll find the fruit with the fruitId
+   
     Book.findById(bookId)
         .then(book => {
-            // then we'll send req.body to the comments array
             book.comments.push(req.body)
-            
-            // save the fruit
             return book.save()
         })
         .then(book => {
@@ -45,7 +39,6 @@ router.post('/:bookId', (req, res) => {
             res.redirect(`/books/${book.id}`)
             console.log("the author is",  book.comments.author)
         })
-        // or show an error if we have one
         .catch(error => {
             console.log(error)
             res.send(error)
@@ -55,10 +48,9 @@ router.post('/:bookId', (req, res) => {
 // DELETE -> to destroy a comment
 
 router.delete('/delete/:bookId/:commId', (req, res) => {
-    // first we want to parse out our ids
     const bookId = req.params.bookId
     const commId = req.params.commId
-    // then we'll find the fruit
+    // find the book
     Book.findById(bookId)
         .then(book => {
             const theComment = book.comments.id(commId)
@@ -74,7 +66,7 @@ router.delete('/delete/:bookId/:commId', (req, res) => {
 
         })
         .then(book => {
-            // redirect to the fruit show page
+            // redirect show page
             res.redirect(`/books/${bookId}`)
         })
         .catch(error => {
@@ -84,7 +76,5 @@ router.delete('/delete/:bookId/:commId', (req, res) => {
         })
 })
 
-////////////////////////////////////////////
-// Export the Router
-////////////////////////////////////////////
+
 module.exports = router
